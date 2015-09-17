@@ -23,7 +23,7 @@ You will need to look into the code (akka package specifically) to know what is 
 
 # pre-requisite
 * java 8
-* gradle 1.4
+* gradle 2.4
 
 # Running
 * gradle build
