@@ -3,12 +3,10 @@ Spring project that uses Akka internally
 
 ## Value
 This application is an example of a Spending Managment System.
-
 You can use it to record your breakfast, Lunch and Dinner expenses!
 
 ## Simple explanation of the code
 User sends a request (restfull) to save a record, the controller then creates a command asking the writeWorker to write this record to db.
-
 Note: command is the record to be saved (for simplicity)
 
 For Reading, it's the same except it does not work well since there is no way to listen to messages from the readWorker (currently)
