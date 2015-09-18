@@ -9,6 +9,9 @@ import spendingManager.domain.Spending;
 /**
  * In charge of factorial calculation 
  * The result is to the parent (Master object)
+ * Use of Untypedctor: 
+ * “This is due to the fact its quite difficult to implement a Scala PartialFunction in Java 7 and below”
+ *     Excerpt From: Duncan K. DeVore. “Reactive Application Development MEAP V03.” iBooks. 
  */
 public class WriteWorker extends UntypedActor {
 

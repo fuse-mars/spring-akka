@@ -2,7 +2,11 @@ package spendingManager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+/**
+ * 
+ * @author mars
+ *
+ */
 @SpringBootApplication
 public class Application {
 

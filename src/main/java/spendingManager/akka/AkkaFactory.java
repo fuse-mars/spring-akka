@@ -1,7 +1,6 @@
 package spendingManager.akka;
 
 import akka.actor.ActorSystem;
-import akka.actor.ActorRef;
 
 /**
  *
@@ -13,7 +12,7 @@ public class AkkaFactory {
     public static ActorSystem getActorSystem() {
 
         if(system == null) {
-            system = ActorSystem.create("CalcSystem");
+            system = ActorSystem.create("AKKASystem");
         }
 
         return system;
