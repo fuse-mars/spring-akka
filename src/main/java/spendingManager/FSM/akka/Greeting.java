@@ -1,5 +1,7 @@
 package spendingManager.FSM.akka;
 
+import scala.collection.mutable.ArraySeq;
+import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
@@ -29,19 +31,20 @@ import akka.japi.Procedure;
  *
  */
 public class Greeting extends UntypedActor {
-
+	
 	LoggingAdapter log = Logging.getLogger(getContext().system(), this);
 	
 	//hello state (formally called role)
 	Procedure<Object> hello = new Procedure<Object>() {
-
+		private int countMessages = 0;
 		@Override
 		public void apply(Object message) {
 
 			if(message instanceof ImmutableHello) {
 				
 				//-- action performed HELLOA
-				log.info("Received Hello: {}", message);
+				countMessages += 1;
+				log.info("[hello - count = {}] Received Hello: {}", countMessages, ((ImmutableHello) message).name);
 				ImmutableHello ih = new ImmutableHello("Greetings Hello");
 				
 				getSender().tell(ih, getSelf());
@@ -50,6 +53,9 @@ public class Greeting extends UntypedActor {
 				// changing the state to greet now
 				getContext().become(goodbye);
 				
+			}else {
+				System.err.printf("[hello - unhandled] - message: %s \n", message.toString());
+				unhandled(message);
 			}
 			
 		}
@@ -57,14 +63,15 @@ public class Greeting extends UntypedActor {
 	}; 
 	
 	Procedure<Object> goodbye = new Procedure<Object>() {
-		
+		private int countMessages = 0; 
 		@Override
 		public void apply(Object message) {
 
 			if(message instanceof ImmutableGoodbye) {
 				
 				//-- action performed GOODBYEA
-				log.info("Received Goodbye: {}", message);
+				countMessages += 1;
+				log.info("[goodbye - count = {}] Received Goodbye: {}", countMessages, ((ImmutableGoodbye) message).name);
 				ImmutableGoodbye ig = new ImmutableGoodbye("Greetings goodbye");
 				
 				getSender().tell(ig, getSelf());
@@ -74,6 +81,7 @@ public class Greeting extends UntypedActor {
 				getContext().become(hello);
 				
 			} else {
+				System.err.printf("[goodbye - unhandled] - message: %s \n", message.toString());
 				unhandled(message);
 			}
 			
@@ -87,8 +95,14 @@ public class Greeting extends UntypedActor {
 	 */
 	@Override
 	public void onReceive(Object arg0) throws Exception {
+		
+		//transition into "hello" state
 		getContext().become(hello);
 		
 	}
+	
+    public static Props createWorker() {
+        return Props.create(Greeting.class, new ArraySeq<Object>(0));
+    }
 
 }
