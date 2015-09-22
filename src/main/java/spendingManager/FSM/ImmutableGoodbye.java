@@ -1,4 +1,4 @@
-package spendingManager.FSM.akka;
+package spendingManager.FSM;
 
 public final class ImmutableGoodbye {
 	

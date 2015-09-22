@@ -1,15 +1,15 @@
-package spendingManager.FSM;
+package spendingManager.FSM.test;
 
-import spendingManager.FSM.akka.Greeting;
-import spendingManager.FSM.akka.ImmutableGoodbye;
-import spendingManager.FSM.akka.ImmutableHello;
+import spendingManager.FSM.ImmutableGoodbye;
+import spendingManager.FSM.ImmutableHello;
+import spendingManager.FSM.general.Greeting;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 
-public class FSMTest {
+public class FSMGeneralTest {
 
 	public static void main(String[] args) {
-		ActorSystem system = ActorSystem.create("FSMSystem");
+		ActorSystem system = ActorSystem.create("GENERALbasedFSMSystem");
 		ActorRef greetingActor = system.actorOf(Greeting.createWorker(), "Greeting");
 		
 		// this command will put greetingActor in the "hello" state
@@ -61,3 +61,4 @@ public class FSMTest {
 	}
 
 }
+

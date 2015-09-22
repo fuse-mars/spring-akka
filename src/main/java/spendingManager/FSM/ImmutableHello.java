@@ -1,4 +1,4 @@
-package spendingManager.FSM.akka;
+package spendingManager.FSM;
 
 /**
  * this Class cannot be extended
