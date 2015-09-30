@@ -1,6 +1,5 @@
 package spendingManager.domain;
 
-import java.util.List;
 //money spend on lunch or dinner
 public class Spending {
 

@@ -2,7 +2,7 @@
 Spring project that uses Akka internally 
 
 ## Value
-This application is an example of a Spending Managment System.
+This application is an example of a Spending Management System.
 You can use it to record your breakfast, Lunch and Dinner expenses!
 
 ## Simple explanation of the code

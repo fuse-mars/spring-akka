@@ -3,7 +3,6 @@ package spendingManager.akka;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
 import scala.collection.mutable.ArraySeq;
-
 import spendingManager.domain.Spending;
 
 /**
@@ -12,10 +11,7 @@ import spendingManager.domain.Spending;
  */
 public class ReadWorker extends UntypedActor {
 
-    private static Spending spending = null;
-    public static Spending getValue() {
-        return spending;
-    }
+    private Spending spending = null;
 
     @Override
     public void onReceive(Object message) {
@@ -25,12 +21,16 @@ public class ReadWorker extends UntypedActor {
             
             //in this example, we read the requested value 
             // saves it into a static variable
-            ReadWorker.spending = Database.read((Long) message);
+            spending = Database.read((Long) message);
+            
+            if(spending == null){
+            	spending = new Spending((Long)message, null, 0);
+            }
             
             //2. After the task is "completely" done,
             //   send notification to kafka
             System.out.println("[ ReadWorker ] done reading from db");
-            // getSender().tell(new Result(bigInt), getSelf());
+            getSender().tell(spending, getSelf());
         
         } else
             unhandled(message);
